@@ -1,14 +1,54 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import React from 'react';
+import MainAppLayout from '../components/layout/MainAppLayout';
+import FunnelCountCard from '../components/Dashboard/FunnelCountCard';
+import SourcesPieChart from '../components/Dashboard/SourcesPieChart';
+import LeadsTrackingChart from '../components/Dashboard/LeadsTrackingChart';
+import StatsGrid from '../components/Dashboard/StatsGrid';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'; // For Sales placeholder
 
-const Index = () => {
+const DashboardPage: React.FC = () => {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">Welcome to Your Blank App</h1>
-        <p className="text-xl text-gray-600">Start building your amazing project here!</p>
+    <MainAppLayout pageTitle="Dashboard" currentPath="/dashboard">
+      <div className="flex flex-col gap-6">
+        <Tabs defaultValue="leads" className="w-full">
+          <TabsList className="mb-6">
+            <TabsTrigger value="sales">Sales</TabsTrigger>
+            <TabsTrigger value="leads">Leads</TabsTrigger>
+          </TabsList>
+          
+          <TabsContent value="sales">
+            <Card>
+              <CardHeader>
+                <CardTitle>Sales Overview</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-muted-foreground">
+                  Sales-specific data, charts, and statistics would be displayed here.
+                  This section is currently a placeholder.
+                </p>
+              </CardContent>
+            </Card>
+          </TabsContent>
+
+          <TabsContent value="leads" className="space-y-6">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+              <div className="lg:col-span-2">
+                <FunnelCountCard />
+              </div>
+              <div className="lg:col-span-1">
+                <SourcesPieChart />
+              </div>
+            </div>
+            
+            <LeadsTrackingChart />
+            
+            <StatsGrid />
+          </TabsContent>
+        </Tabs>
       </div>
-    </div>
+    </MainAppLayout>
   );
 };
 
-export default Index;
+export default DashboardPage;
