@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss";
+import defaultTheme from 'tailwindcss/defaultTheme';
 
 export default {
 	darkMode: ["class"],
@@ -18,12 +19,18 @@ export default {
 			}
 		},
 		extend: {
+      fontFamily: {
+        sans: ['Inter', ...defaultTheme.fontFamily.sans],
+      },
 			colors: {
 				border: 'hsl(var(--border))',
 				input: 'hsl(var(--input))',
 				ring: 'hsl(var(--ring))',
 				background: 'hsl(var(--background))',
 				foreground: 'hsl(var(--foreground))',
+        // For PRD specific text classes like text-primaryText, text-secondaryText
+        primaryText: 'hsl(var(--foreground))', // Maps to PRD primaryText color via --foreground CSS var
+        secondaryText: 'hsl(var(--muted-foreground))', // Maps to PRD secondaryText color via --muted-foreground CSS var
 				primary: {
 					DEFAULT: 'hsl(var(--primary))',
 					foreground: 'hsl(var(--primary-foreground))'
@@ -44,6 +51,11 @@ export default {
 					DEFAULT: 'hsl(var(--accent))',
 					foreground: 'hsl(var(--accent-foreground))'
 				},
+        // Custom accent colors from PRD
+        accentYellow: 'hsl(var(--accent-yellow))',
+        accentGreen: 'hsl(var(--accent-green))',
+        // accentBlue is covered by 'primary' and 'accent' using CSS vars
+        // accentRed is covered by 'destructive' using CSS vars
 				popover: {
 					DEFAULT: 'hsl(var(--popover))',
 					foreground: 'hsl(var(--popover-foreground))'
@@ -64,6 +76,7 @@ export default {
 				}
 			},
 			borderRadius: {
+        // The actual values of lg, md, sm will change because --radius in CSS is updated to 0.375rem (rounded-md)
 				lg: 'var(--radius)',
 				md: 'calc(var(--radius) - 2px)',
 				sm: 'calc(var(--radius) - 4px)'
